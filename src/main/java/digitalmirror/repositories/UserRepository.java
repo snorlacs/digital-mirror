@@ -2,7 +2,7 @@ package digitalmirror.repositories;
 
 import java.util.List;
 
-import digitalmirror.model.User;
+import digitalmirror.domain.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
