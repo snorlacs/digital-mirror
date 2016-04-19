@@ -14,4 +14,6 @@ public interface UserRepository extends GraphRepository<User> {
 
     List<User> findByFirstName(@Param("first_name") String name);
 
+    User findByfacebookId(@Param("facebookId") String userId);
+
 }

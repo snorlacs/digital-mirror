@@ -1,8 +1,10 @@
 package digitalmirror.domain;
 
 
+//import digitalmirror.RelationshipEntities.UserBeaconRelation;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 
 @NodeEntity
 public class UserBeaconLocation {
@@ -17,6 +19,8 @@ public class UserBeaconLocation {
 
     private String minorId;
 
+    @RelatedTo(type = "NEAR_BY")
+    private User user;
 
     public String getUuId() {
         return uuId;
@@ -49,5 +53,14 @@ public class UserBeaconLocation {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
 }
