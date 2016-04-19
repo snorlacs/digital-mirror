@@ -1,5 +1,6 @@
 package digitalmirror.domain;
 
+
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
@@ -7,7 +8,8 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
 @NodeEntity
 public class User {
 
-    @GraphId private Long id;
+    @GraphId
+    private Long id;
 
     @Indexed(unique = true)
     private String facebookId;
@@ -62,4 +64,5 @@ public class User {
     public void setDisplayPicture(String displayPicture) {
         this.displayPicture = displayPicture;
     }
+
 }
