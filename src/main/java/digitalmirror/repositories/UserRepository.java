@@ -14,5 +14,4 @@ public interface UserRepository extends GraphRepository<User> {
     @Query("MATCH (beacon)-[:ATTACHED]->(machine {name: {0} }) MATCH (user)-[:NEAR_BY]->(beacon) return user")
     User findNearByUser(String machineName);
 
-
 }
