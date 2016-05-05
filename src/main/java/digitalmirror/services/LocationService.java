@@ -19,17 +19,13 @@ public class LocationService {
     @Autowired
     BeaconRepository beaconRepository;
 
-    public String createUserBeaconRelation(UserBeaconLocation userBeaconLocation) {
+    public void createUserBeaconRelation(UserBeaconLocation userBeaconLocation) {
 
         User user = userRepository.findByUserId(userBeaconLocation.getUserId());
         Beacon beacon = beaconRepository.findBeacon(userBeaconLocation.getUuId(),userBeaconLocation.getMajorId(),userBeaconLocation.getMinorId());
-        if(user==null || beacon==null){
-               return "Failure: user or beacon has not been registered\n";
-        }
-        else{
+        if(user!=null && beacon!=null){
             beacon.setUser(user);
             beaconRepository.save(beacon);
-            return "Success: user-beacon relation creation\n";
         }
 
     }
