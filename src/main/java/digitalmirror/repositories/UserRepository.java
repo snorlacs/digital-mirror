@@ -1,8 +1,7 @@
 package digitalmirror.repositories;
 
-import java.util.List;
-
 import digitalmirror.domain.User;
+import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -10,10 +9,10 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface UserRepository extends GraphRepository<User> {
 
-    List<User> findByLastName(@Param("last_name") String name);
+    User findByUserId(@Param("userId") String userId);
 
-    List<User> findByFirstName(@Param("first_name") String name);
+    @Query("MATCH (beacon)-[:ATTACHED]->(machine {name: {0} }) MATCH (user)-[:NEAR_BY]->(beacon) return user")
+    User findNearByUser(String machineName);
 
-    User findByfacebookId(@Param("facebookId") String userId);
 
 }

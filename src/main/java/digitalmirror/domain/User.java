@@ -12,7 +12,7 @@ public class User {
     private Long id;
 
     @Indexed(unique = true)
-    private String facebookId;
+    private String userId;
 
     private String firstName;
     private String lastName;
@@ -49,12 +49,12 @@ public class User {
         return id;
     }
 
-    public String getFacebookId() {
-        return facebookId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setFacebookId(String facebookId) {
-        this.facebookId = facebookId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getDisplayPicture() {

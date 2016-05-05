@@ -21,6 +21,7 @@ jar {
 repositories {
     mavenCentral()
     maven { url "https://repo.spring.io/libs-release" }
+    jcenter()
 }
 
 sourceCompatibility = 1.8
@@ -31,6 +32,9 @@ dependencies {
     compile("org.springframework.data:spring-data-neo4j")
     compile("org.springframework.data:spring-data-neo4j-rest:3.4.4.RELEASE")
     compile("org.hibernate:hibernate-validator")
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.+"
+
 }
 
 task wrapper(type: Wrapper) {

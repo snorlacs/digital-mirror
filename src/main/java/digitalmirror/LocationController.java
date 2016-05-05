@@ -1,12 +1,9 @@
-package digitalmirror.controllers;
+package digitalmirror;
 
 import digitalmirror.domain.UserBeaconLocation;
 import digitalmirror.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -16,7 +13,9 @@ public class LocationController {
     LocationService locationService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/location")
-    public void postLocation(@RequestBody UserBeaconLocation userBeaconLocation) {
+    public UserBeaconLocation postLocation(@RequestBody UserBeaconLocation userBeaconLocation) {
         locationService.createUserBeaconRelation(userBeaconLocation);
+        return userBeaconLocation;
     }
+
 }
