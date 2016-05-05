@@ -1,4 +1,4 @@
-package digitalmirror;
+package digitalmirror.controllers;
 
 
 import digitalmirror.domain.User;
