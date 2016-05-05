@@ -8,7 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class UserServiceTest {
@@ -35,7 +37,7 @@ public class UserServiceTest {
     public void shouldGetUserByMachineName() throws Exception {
         User user = Mockito.mock(User.class);
         String machineName = "raspi_1";
-        userService.getUserByMachineName(machineName);
-        verify(userRepository).findNearByUser(machineName);
+        when(userRepository.findNearByUser(machineName)).thenReturn(user);
+        assertEquals(user,userService.getUserByMachineName(machineName));
     }
 }
