@@ -19,6 +19,9 @@ public class Product {
     @RelatedTo(type = "BELONGS_TO")
     private Category category;
 
+    @RelatedTo(type = "HAS")
+    private Beacon beacon;
+
     public String[] getImages() {
         return images;
     }
@@ -41,5 +44,13 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Beacon getBeacon() {
+        return beacon;
+    }
+
+    public void setBeacon(Beacon beacon) {
+        this.beacon = beacon;
     }
 }

@@ -1,5 +1,6 @@
 package digitalmirror.repositories;
 
+import digitalmirror.domain.Beacon;
 import digitalmirror.domain.Category;
 import digitalmirror.domain.Product;
 import org.springframework.data.neo4j.annotation.Query;
@@ -18,5 +19,6 @@ public interface ProductRepository extends GraphRepository<Product>{
     @Query("MATCH (products)-[:BELONGS_TO]->(category {name: {0} }) return products")
     Iterable<Product> fetchProductsByCategory(String categoryName);
 
-
+    @Query("MATCH (product)-[:HAS]->({0}) MATCH (product)-[:BELONGS_TO]->(category) return category.name,product")
+    Iterable<Map<String,Product>> fetchProductWithCategoryByBeacon(Beacon beacon);
 }

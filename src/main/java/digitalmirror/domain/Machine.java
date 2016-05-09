@@ -1,6 +1,5 @@
 package digitalmirror.domain;
 
-import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
@@ -15,7 +14,7 @@ public class Machine {
     @Indexed(unique = true)
     private String name;
 
-    @RelatedTo(type="ATTACHED", direction = Direction.BOTH)
+    @RelatedTo(type="ATTACHED")
     private Beacon beacon;
 
     public String getName() {

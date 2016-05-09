@@ -3,6 +3,7 @@ package digitalmirror.services;
 import digitalmirror.domain.Beacon;
 import digitalmirror.domain.Product;
 import digitalmirror.repositories.LookRepository;
+import digitalmirror.repositories.ProductRepository;
 import digitalmirror.util.UtilConvertor;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,6 +28,9 @@ public class LookServiceTest {
     @Mock
     private UtilConvertor utilConvertor;
 
+    @Mock
+    private ProductRepository productRepository;
+
     @Before
     public void setUp() throws Exception {
         initMocks(this);
@@ -36,9 +40,19 @@ public class LookServiceTest {
     public void shouldFetchTheListOfPrimaryProductsForLookFromRepoByProductBeacon() throws Exception {
         Beacon beacon = Mockito.mock(Beacon.class);
         Iterable<Map<String,Product>> mapIterable = Mockito.mock(Iterable.class);
+        Iterable<Map<String,Product>> chosenProductIterable = Mockito.mock(Iterable.class);
         Map<String,Product> productsMap = Mockito.mock(Map.class);
+        Map<String,Product> chosenProduct = Mockito.mock(Map.class);
+
+        when(productRepository.fetchProductWithCategoryByBeacon(beacon)).thenReturn(chosenProductIterable);
         when(lookRepository.getAllPrimaryProducts(beacon)).thenReturn(mapIterable);
         when(utilConvertor.convertIterableToMap(mapIterable)).thenReturn(productsMap);
-        Assert.assertEquals(lookService.getPrimaryProductsForLook(beacon),productsMap);
+        when(utilConvertor.convertIterableToMap(chosenProductIterable)).thenReturn(chosenProduct);
+
+
+        Map<String,Product> fetchedProducts = lookService.getPrimaryProductsForLook(beacon);
+        productsMap.putAll(chosenProduct);
+        Assert.assertEquals(fetchedProducts,productsMap);
+
     }
 }
