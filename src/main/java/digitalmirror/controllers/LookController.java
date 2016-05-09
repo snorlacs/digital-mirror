@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class LookController {
@@ -14,7 +15,7 @@ public class LookController {
     @Autowired
     private LookService lookService;
 
-    public List<Product> getLookByProductBeacon(Beacon beacon) {
+    public Map<String,Product> getLookByProductBeacon(Beacon beacon) {
         return lookService.getPrimaryProductsForLook(beacon);
     }
 }

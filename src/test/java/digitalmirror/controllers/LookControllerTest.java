@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -32,9 +33,8 @@ public class LookControllerTest {
     @Test
     public void shouldGetTheLookBasedOnTheChosenProduct() throws Exception {
         Beacon beacon = Mockito.mock(Beacon.class);
-        List<Product> productList = Mockito.mock(List.class);
+        Map<String,Product> productList = Mockito.mock(Map.class);
         when(lookService.getPrimaryProductsForLook(beacon)).thenReturn(productList);
         Assert.assertEquals(lookController.getLookByProductBeacon(beacon),productList);
-
     }
 }

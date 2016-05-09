@@ -2,11 +2,15 @@ package digitalmirror.services;
 
 import digitalmirror.domain.User;
 import digitalmirror.repositories.UserRepository;
+import digitalmirror.util.UtilConvertor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.data.neo4j.conversion.Result;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -20,6 +24,9 @@ public class UserServiceTest {
 
     @Mock
     UserRepository userRepository;
+
+    @Mock
+    UtilConvertor utilConvertor;
 
     @Before
     public void setUp() throws Exception {
@@ -39,5 +46,14 @@ public class UserServiceTest {
         String machineName = "raspi_1";
         when(userRepository.findNearByUser(machineName)).thenReturn(user);
         assertEquals(user,userService.getUserByMachineName(machineName));
+    }
+
+    @Test
+    public void shouldGetAllUsersFromTheRepo() throws Exception {
+        Result<User> userIterable = Mockito.mock(Result.class);
+        List<User> users = Mockito.mock(List.class);
+        when(userRepository.findAll()).thenReturn(userIterable);
+        when(utilConvertor.convertIterableToList(userIterable)).thenReturn(users);
+        assertEquals(users,userService.getAllUsers());
     }
 }
