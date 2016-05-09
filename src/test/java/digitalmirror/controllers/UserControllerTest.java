@@ -28,7 +28,6 @@ public class UserControllerTest {
 
     @Test
     public void shouldCallGetAllUsersMethodOfUserService() throws Exception {
-        User user = Mockito.mock(User.class);
         userController.getUsers();
         verify(userService).getAllUsers();
     }
