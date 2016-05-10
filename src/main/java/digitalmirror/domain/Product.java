@@ -1,5 +1,6 @@
 package digitalmirror.domain;
 
+import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
@@ -21,6 +22,9 @@ public class Product {
 
     @RelatedTo(type = "HAS")
     private Beacon beacon;
+
+    @RelatedTo(type = "CONTAINS",direction = Direction.INCOMING)
+    private Look look;
 
     public String[] getImages() {
         return images;
@@ -52,5 +56,13 @@ public class Product {
 
     public void setBeacon(Beacon beacon) {
         this.beacon = beacon;
+    }
+
+    public Look getLook() {
+        return look;
+    }
+
+    public void setLook(Look look) {
+        this.look = look;
     }
 }

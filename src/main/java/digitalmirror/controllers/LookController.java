@@ -1,13 +1,9 @@
 package digitalmirror.controllers;
 
-import digitalmirror.domain.Beacon;
-import digitalmirror.domain.Product;
+import digitalmirror.domain.Look;
 import digitalmirror.services.LookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LookController {
@@ -15,7 +11,9 @@ public class LookController {
     @Autowired
     private LookService lookService;
 
-    public Map<String,Product> getLookByProductBeacon(Beacon beacon) {
-        return lookService.getPrimaryProductsForLook(beacon);
+    @RequestMapping(method = RequestMethod.GET, value="/look")
+    public Look getLookByProductBeacon(@RequestParam("uuId")String uuId, @RequestParam("majorId")String majorId, @RequestParam("minorId")String minorId) {
+        System.out.println("======================================="+uuId+"=================================");
+        return lookService.getLook(uuId,majorId,minorId);
     }
 }

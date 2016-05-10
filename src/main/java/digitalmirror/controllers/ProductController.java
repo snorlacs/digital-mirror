@@ -1,5 +1,6 @@
 package digitalmirror.controllers;
 
+import digitalmirror.domain.Category;
 import digitalmirror.domain.Product;
 import digitalmirror.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

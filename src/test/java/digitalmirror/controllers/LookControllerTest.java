@@ -1,6 +1,6 @@
 package digitalmirror.controllers;
 
-import digitalmirror.domain.Beacon;
+import digitalmirror.domain.Look;
 import digitalmirror.domain.Product;
 import digitalmirror.services.LookService;
 import org.junit.Assert;
@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.when;
@@ -32,9 +31,11 @@ public class LookControllerTest {
 
     @Test
     public void shouldGetTheLookBasedOnTheChosenProduct() throws Exception {
-        Beacon beacon = Mockito.mock(Beacon.class);
-        Map<String,Product> productList = Mockito.mock(Map.class);
-        when(lookService.getPrimaryProductsForLook(beacon)).thenReturn(productList);
-        Assert.assertEquals(lookController.getLookByProductBeacon(beacon),productList);
+        String uuId = "uuId";
+        String majorId = "majorId";
+        String minorId = "minorId";
+        Look look = Mockito.mock(Look.class);
+        when(lookService.getLook(uuId,majorId,minorId)).thenReturn(look);
+        Assert.assertEquals(lookController.getLookByProductBeacon(uuId,majorId,minorId),look);
     }
 }

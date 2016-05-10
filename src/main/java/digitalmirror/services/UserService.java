@@ -12,10 +12,11 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    UtilConvertor utilConvertor;
+    private UtilConvertor utilConvertor;
+
 
     public User registerUser(User user) {
         return userRepository.save(user);

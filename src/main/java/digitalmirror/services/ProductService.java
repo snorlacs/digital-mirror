@@ -18,7 +18,9 @@ public class ProductService {
     ProductRepository productRepository;
 
     @Autowired
-    UtilConvertor utilConvertor;
+    private UtilConvertor utilConvertor;
+
+
 
     public void addProduct(Product product) {
         productRepository.save(product);
