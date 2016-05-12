@@ -26,6 +26,9 @@ public class Product {
     @RelatedTo(type = "CONTAINS",direction = Direction.INCOMING)
     private Look look;
 
+    @RelatedTo(type = "NEAR")
+    private Machine machine;
+
     public String[] getImages() {
         return images;
     }
@@ -64,5 +67,13 @@ public class Product {
 
     public void setLook(Look look) {
         this.look = look;
+    }
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(Machine machine) {
+        this.machine = machine;
     }
 }

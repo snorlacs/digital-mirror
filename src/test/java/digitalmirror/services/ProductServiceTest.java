@@ -1,8 +1,11 @@
 package digitalmirror.services;
 
+import digitalmirror.domain.Machine;
 import digitalmirror.domain.Product;
+import digitalmirror.repositories.MachineRepository;
 import digitalmirror.repositories.ProductRepository;
 import digitalmirror.util.UtilConvertor;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -26,6 +29,9 @@ public class ProductServiceTest {
     @Mock
     UtilConvertor utilConvertor;
 
+    @Mock
+    MachineRepository machineRepository;
+
     @Before
     public void setUp() throws Exception {
         initMocks(this);
@@ -46,7 +52,23 @@ public class ProductServiceTest {
         List<Product> products = Mockito.mock(List.class);
         when(productRepository.fetchProductsByCategory(categoryName)).thenReturn(productIterable);
         when(utilConvertor.convertIterableToList(productIterable)).thenReturn(products);
-        productService.fetchProductByCategory(categoryName);
+        Assert.assertEquals(products,productService.fetchProductByCategory(categoryName));
+    }
+
+    @Test
+    public void shouldCreateProductMachineRelation() throws Exception {
+        Product product = Mockito.mock(Product.class);
+        Machine machine = Mockito.mock(Machine.class);
+        when(productRepository.fetchProductByBeacon("uuId","majorId","minorId")).thenReturn(product);
+        when(machineRepository.findByName("machineName")).thenReturn(machine);
+        productService.createProductMachineRelation("uuId","majorId","minorId","machineName");
+        verify(productRepository).save(product);
+    }
+
+    @Test
+    public void shouldRemoveProductMachineRelation() throws Exception {
+        productService.removeProductMachineRelation("machineName");
+        verify(productRepository).removeProductMachineRelation("machineName");
 
     }
 }

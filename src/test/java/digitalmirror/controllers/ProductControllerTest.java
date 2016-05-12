@@ -37,6 +37,17 @@ public class ProductControllerTest {
         Product product = Mockito.mock(Product.class);
         productController.addProduct(product);
         verify(productService).addProduct(product);
+    }
 
+    @Test
+    public void shouldCreateProductMachineRelation() throws Exception {
+        productController.createProductMachinerelation("uuId","majorId","minorId","machineName");
+        verify(productService).createProductMachineRelation("uuId","majorId","minorId","machineName");
+    }
+
+    @Test
+    public void shouldRemoveProductMachineRelation() throws Exception {
+        productController.removeProductMachineRelation("machineName");
+        verify(productService).removeProductMachineRelation("machineName");
     }
 }

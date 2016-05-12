@@ -25,4 +25,15 @@ public class ProductController {
        return productService.fetchProductByCategory(categoryName.toLowerCase());
     }
 
+    @RequestMapping(method = RequestMethod.GET, value="/relateProductToMachine")
+    public void createProductMachinerelation(@RequestParam("uuId")String uuId, @RequestParam("majorId")String majorId, @RequestParam("minorId")String minorId,
+                                             @RequestParam("machineName") String machineName){
+        productService.createProductMachineRelation(uuId,majorId,minorId,machineName);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/removeRelation")
+    public void removeProductMachineRelation(@RequestParam("machineName") String machineName) {
+        productService.removeProductMachineRelation(machineName);
+    }
+
 }

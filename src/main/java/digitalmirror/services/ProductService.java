@@ -1,7 +1,8 @@
 package digitalmirror.services;
 
-import com.google.common.collect.Lists;
+import digitalmirror.domain.Machine;
 import digitalmirror.domain.Product;
+import digitalmirror.repositories.MachineRepository;
 import digitalmirror.repositories.ProductRepository;
 import digitalmirror.util.UtilConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class ProductService {
     ProductRepository productRepository;
 
     @Autowired
+    MachineRepository machineRepository;
+
+    @Autowired
     private UtilConvertor utilConvertor;
 
 
@@ -31,4 +35,14 @@ public class ProductService {
     }
 
 
+    public void createProductMachineRelation(String uuId, String majorId, String minorId, String machineName) {
+        Product product = productRepository.fetchProductByBeacon(uuId,majorId,minorId);
+        Machine machine = machineRepository.findByName(machineName);
+        product.setMachine(machine);
+        productRepository.save(product);
+    }
+
+    public void removeProductMachineRelation(String machineName) {
+        productRepository.removeProductMachineRelation(machineName);
+    }
 }

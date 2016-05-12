@@ -19,4 +19,10 @@ public interface ProductRepository extends GraphRepository<Product>{
 
     @Query("MATCH (product)-[:HAS]->(beacon {uuId: {0} ,majorId: {1} ,minorId: {2} }) MATCH (product)-[:BELONGS_TO]->(category) return category.name,product")
     Map<String,Object> fetchProductWithCategoryByBeacon(String uuId, String majorId, String minorId);
+
+    @Query("MATCH (product)-[:HAS]->(beacon {uuId: {0} ,majorId: {1} ,minorId: {2} }) return product")
+    Product fetchProductByBeacon(String uuId, String majorId, String minorId);
+
+    @Query("MATCH ()-[r:NEAR]->(machine {name: {0} }) delete r")
+    void removeProductMachineRelation(String machineName);
 }

@@ -6,4 +6,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface MachineRepository extends GraphRepository<Machine> {
 
+    Machine findByName(@Param("name") String machineName);
 }
