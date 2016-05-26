@@ -31,6 +31,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.data:spring-data-neo4j")
     compile("org.springframework.data:spring-data-neo4j-rest:3.4.4.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-websocket")
+    compile("org.springframework:spring-messaging")
     compile("org.hibernate:hibernate-validator")
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.+"

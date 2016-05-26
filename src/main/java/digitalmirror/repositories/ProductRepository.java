@@ -1,5 +1,6 @@
 package digitalmirror.repositories;
 
+import digitalmirror.domain.Category;
 import digitalmirror.domain.Product;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
@@ -25,4 +26,16 @@ public interface ProductRepository extends GraphRepository<Product>{
 
     @Query("MATCH ()-[r:NEAR]->(machine {name: {0} }) delete r")
     void removeProductMachineRelation(String machineName);
+
+    @Query("MATCH (look)-[:CONTAINS]->(product) where look.name = {0} return product" )
+    Iterable<Product> getProductsWithCategoryByLook(String lookName);
+
+    @Query("MATCH (product)-[:BELONGS_TO]->(category) where product.images = {0} return category.name")
+    String getCategoryNameByProduct(String[] images);
+
+    @Query("MATCH (look)-[:ASSOCIATED {order: {0} }]->(c) return c.name")
+    String getCategoryNameByLookAssociatedOrder(String order);
+
+    @Query("MATCH (look {name: {0}})-[r:ASSOCIATED]->(c) return c.name order by r.order")
+    List<String> getCategoryOrderByLook(String lookName);
 }

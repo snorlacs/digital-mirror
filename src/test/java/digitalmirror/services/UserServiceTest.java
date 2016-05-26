@@ -3,6 +3,7 @@ package digitalmirror.services;
 import digitalmirror.domain.User;
 import digitalmirror.repositories.UserRepository;
 import digitalmirror.util.UtilConvertor;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -55,5 +56,20 @@ public class UserServiceTest {
         when(userRepository.findAll()).thenReturn(userIterable);
         when(utilConvertor.convertIterableToList(userIterable)).thenReturn(users);
         assertEquals(users,userService.getAllUsers());
+    }
+
+    @Test
+    public void shouldReturnTrueStringIfUserIsLoggedOut() throws Exception {
+        String machineName = "machineName";
+        when(userRepository.findNearByUser("machineName")).thenReturn(null);
+        Assert.assertEquals("true",userService.isUserLoggedOut(machineName));
+    }
+
+    @Test
+    public void shouldReturnFalseStringIfUserIsLoggedIn() throws Exception {
+        String machineName = "machineName";
+        User user = Mockito.mock(User.class);
+        when(userRepository.findNearByUser("machineName")).thenReturn(user);
+        Assert.assertEquals("false",userService.isUserLoggedOut(machineName));
     }
 }

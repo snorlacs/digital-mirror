@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -22,7 +22,7 @@ public class ProductService {
     MachineRepository machineRepository;
 
     @Autowired
-    private UtilConvertor utilConvertor;
+    UtilConvertor utilConvertor;
 
 
 
@@ -44,5 +44,24 @@ public class ProductService {
 
     public void removeProductMachineRelation(String machineName) {
         productRepository.removeProductMachineRelation(machineName);
+    }
+
+    public Map<String, List<Product> > getProductsWithCategoryByLook(String lookName) {
+        List<Product> productList= utilConvertor.convertIterableToList(productRepository.getProductsWithCategoryByLook(lookName));
+        Map<String, List<Product>>productMap = groupProductsByCategory(productList,productRepository.getCategoryOrderByLook(lookName));
+        return productMap;
+
+    }
+
+    private Map<String, List<Product>> groupProductsByCategory(List<Product> products,List<String> categoryOrder) {
+        Map<String,List<Product>> productMap = new LinkedHashMap<>();
+        for(String categoryName : categoryOrder) {
+            productMap.put(categoryName,new ArrayList<>());
+        }
+        for (Product product : products) {
+            String categoryName = productRepository.getCategoryNameByProduct(product.getImages());
+            productMap.get(categoryName).add(product);
+        }
+        return productMap;
     }
 }

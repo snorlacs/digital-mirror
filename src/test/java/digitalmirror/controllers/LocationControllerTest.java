@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.neo4j.cypher.internal.compiler.v2_0.functions.Str;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -29,5 +30,12 @@ public class LocationControllerTest {
         UserBeaconLocation userBeaconLocation = Mockito.mock(UserBeaconLocation.class);
         locationController.postLocation(userBeaconLocation);
         verify(locationService).createUserBeaconRelation(userBeaconLocation);
+    }
+
+    @Test
+    public void shouldRemoveUserBeaconRelationInTheDBViaService() throws Exception {
+        String userId = "userId";
+        locationController.removeUserBeaconMapping(userId);
+        verify(locationService).deleteUserBeaconRelation(userId);
     }
 }

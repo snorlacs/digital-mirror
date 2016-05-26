@@ -14,14 +14,6 @@ public class Category {
     @Indexed(unique = true)
     private String name;
 
-    public Category() {
-    }
-
-    public Category(Long id, String type) {
-        this.id = id;
-        this.name = type;
-    }
-
     public String getName() {
         return name;
     }

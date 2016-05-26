@@ -29,4 +29,8 @@ public class UserController {
         return userService.getUserByMachineName(machineName);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/logout")
+    public String isUserLoggedOut(@RequestParam("machineName")String machineName) {
+        return userService.isUserLoggedOut(machineName);
+    }
 }

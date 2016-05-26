@@ -30,4 +30,13 @@ public class UserService {
 
         return userRepository.findNearByUser(machineName);
     }
+
+    public String isUserLoggedOut(String machineName) {
+
+        User user = userRepository.findNearByUser(machineName);
+        if(user == null) {
+            return "true";
+        }
+        return "false";
+    }
 }

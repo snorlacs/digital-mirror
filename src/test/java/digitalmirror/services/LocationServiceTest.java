@@ -48,4 +48,11 @@ public class LocationServiceTest {
         verify(beaconRepository).save(beacon);
         verify(beacon).setUser(user);
     }
+
+    @Test
+    public void shouldRemoveUserBeaconRelationInTheDBViaRepository() throws Exception {
+        String userId = "userId";
+        locationService.deleteUserBeaconRelation(userId);
+        verify(userRepository).deleteUserBeaconRelation(userId);
+    }
 }

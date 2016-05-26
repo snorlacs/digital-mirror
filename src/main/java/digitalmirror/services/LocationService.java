@@ -29,4 +29,8 @@ public class LocationService {
         }
 
     }
+
+    public void deleteUserBeaconRelation(String userId) {
+        userRepository.deleteUserBeaconRelation(userId);
+    }
 }

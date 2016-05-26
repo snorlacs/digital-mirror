@@ -46,6 +46,12 @@ public class UserControllerTest {
         User user = Mockito.mock(User.class);
         when(userService.getUserByMachineName(machineName)).thenReturn(user);
         assertEquals(user,userController.getUserByMachineName(machineName));
+    }
 
+    @Test
+    public void shouldCheckWhetherUserIsLoggedOutOrNotByCallingService() throws Exception {
+        String machineName = "raspi_1";
+        userController.isUserLoggedOut(machineName);
+        verify(userService).isUserLoggedOut(machineName);
     }
 }

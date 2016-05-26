@@ -17,4 +17,7 @@ public class LookService {
     }
 
 
+    public Look getLookByProductCode(String productCode) {
+        return lookRepository.fetchLookByProductCode(productCode);
+    }
 }

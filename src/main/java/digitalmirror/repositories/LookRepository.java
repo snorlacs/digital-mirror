@@ -13,4 +13,8 @@ public interface LookRepository extends GraphRepository<Look>{
             "MATCH (chosenProduct)-[:HAS]->(beacon)" +
             "MATCH (look)-[:CONTAINS]->(chosenProduct) return look")
     Look getLook(String uuId, String majorId, String minorId);
+
+    @Query("MATCH (look)-[:CONTAINS]->(product { productCode : {0} }) return look")
+    Look fetchLookByProductCode(String productCode);
 }
+

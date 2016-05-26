@@ -39,4 +39,12 @@ public class LookServiceTest {
         Assert.assertEquals(lookService.getLook(uuId,majorId,minorId),look);
 
     }
+
+    @Test
+    public void shouldGetLookByProductCodeFromDbViaRepo() throws Exception {
+        String productCode = "productCode";
+        Look look = Mockito.mock(Look.class);
+        when(lookRepository.fetchLookByProductCode(productCode)).thenReturn(look);
+        Assert.assertEquals(lookService.getLookByProductCode(productCode),look);
+    }
 }

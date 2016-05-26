@@ -1,6 +1,7 @@
 package digitalmirror.domain;
 
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
 @NodeEntity
@@ -9,18 +10,19 @@ public class Look {
     @GraphId
     private Long id;
 
-    private String image;
+    private String imageURL;
 
     private String gender;
 
+    @Indexed(unique = true)
     private String name;
 
-    public String getImage() {
-        return image;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getGender() {

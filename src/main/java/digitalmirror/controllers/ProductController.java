@@ -1,12 +1,13 @@
 package digitalmirror.controllers;
 
-import digitalmirror.domain.Category;
+import digitalmirror.domain.Look;
 import digitalmirror.domain.Product;
 import digitalmirror.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProductController {
@@ -36,4 +37,8 @@ public class ProductController {
         productService.removeProductMachineRelation(machineName);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value="/lookProducts")
+    public Map<String,List<Product>> getAllProductsUnderLook(@RequestParam("name") String lookName) {
+        return productService.getProductsWithCategoryByLook(lookName);
+    }
 }

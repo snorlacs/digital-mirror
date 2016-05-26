@@ -50,4 +50,11 @@ public class ProductControllerTest {
         productController.removeProductMachineRelation("machineName");
         verify(productService).removeProductMachineRelation("machineName");
     }
+
+    @Test
+    public void shouldGetAllProductsWithCategoryFromService() throws Exception {
+        String lookName = "look";
+        productController.getAllProductsUnderLook(lookName);
+        verify(productService).getProductsWithCategoryByLook(lookName);
+    }
 }

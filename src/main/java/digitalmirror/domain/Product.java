@@ -2,11 +2,20 @@ package digitalmirror.domain;
 
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 
 @NodeEntity
 public class Product {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @GraphId
     private Long id;
@@ -16,6 +25,9 @@ public class Product {
     private String gender;
 
     private String name;
+
+    @Indexed(unique = true)
+    private String productCode;
 
     @RelatedTo(type = "BELONGS_TO")
     private Category category;
@@ -75,5 +87,13 @@ public class Product {
 
     public void setMachine(Machine machine) {
         this.machine = machine;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 }
