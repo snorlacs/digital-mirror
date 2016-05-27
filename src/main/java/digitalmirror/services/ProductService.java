@@ -60,7 +60,10 @@ public class ProductService {
         }
         for (Product product : products) {
             String categoryName = productRepository.getCategoryNameByProduct(product.getImages());
-            productMap.get(categoryName).add(product);
+            if(product.getPrimary())
+                productMap.get(categoryName).add(0,product);
+            else
+                productMap.get(categoryName).add(product);
         }
         return productMap;
     }

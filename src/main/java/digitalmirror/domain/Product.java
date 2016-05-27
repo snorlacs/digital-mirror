@@ -9,14 +9,6 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 @NodeEntity
 public class Product {
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @GraphId
     private Long id;
 
@@ -25,6 +17,8 @@ public class Product {
     private String gender;
 
     private String name;
+
+    private boolean primary;
 
     @Indexed(unique = true)
     private String productCode;
@@ -95,5 +89,13 @@ public class Product {
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
+    }
+
+    public boolean getPrimary() {
+        return primary;
+    }
+
+    public void setPrimary(boolean primary) {
+        this.primary = primary;
     }
 }
