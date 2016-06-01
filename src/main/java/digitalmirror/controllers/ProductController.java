@@ -3,6 +3,7 @@ package digitalmirror.controllers;
 import digitalmirror.domain.Look;
 import digitalmirror.domain.Product;
 import digitalmirror.services.ProductService;
+import org.neo4j.shell.util.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/lookProducts")
-    public Map<String,List<Product>> getAllProductsUnderLook(@RequestParam("name") String lookName) {
-        return productService.getProductsWithCategoryByLook(lookName);
+    public JSONObject getAllProductsUnderLook(@RequestParam("name") String lookName) {
+        return new JSONObject(productService.getProductsWithCategoryByLook(lookName));
     }
 }
