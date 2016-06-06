@@ -4,6 +4,10 @@ package digitalmirror.domain;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
+
+import java.util.List;
+import java.util.Set;
 
 @NodeEntity
 public class User {
@@ -19,7 +23,8 @@ public class User {
     private String gender;
     private String displayPicture;
 
-
+    @RelatedTo(type = "TRIALS")
+    private Set<Product> products;
 
     public String getFirstName() {
         return firstName;
@@ -65,4 +70,11 @@ public class User {
         this.displayPicture = displayPicture;
     }
 
+    public Set<Product> getProducts() {
+        return  products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products =  products;
+    }
 }

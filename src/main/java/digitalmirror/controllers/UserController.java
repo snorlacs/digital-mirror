@@ -2,6 +2,7 @@ package digitalmirror.controllers;
 
 
 import digitalmirror.domain.User;
+import digitalmirror.domain.UserCartItems;
 import digitalmirror.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,10 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/logout")
     public String isUserLoggedOut(@RequestParam("machineName")String machineName) {
         return userService.isUserLoggedOut(machineName);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/trial")
+    public void moveProductsTotrailRoom(@RequestBody UserCartItems userCartItems){
+            userService.relateProductsSelectedWithUser(userCartItems);
     }
 }

@@ -3,7 +3,6 @@ package digitalmirror.controllers;
 import digitalmirror.domain.UserBeaconLocation;
 import digitalmirror.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 

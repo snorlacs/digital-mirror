@@ -1,6 +1,5 @@
 package digitalmirror.repositories;
 
-import digitalmirror.domain.Category;
 import digitalmirror.domain.Product;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
@@ -38,4 +37,7 @@ public interface ProductRepository extends GraphRepository<Product>{
 
     @Query("MATCH (look {name: {0}})-[r:ASSOCIATED]->(c) return c.name order by r.order")
     List<String> getCategoryOrderByLook(String lookName);
+
+    @Query("MATCH (product:Product) where product.productCode = {0} return product")
+    Product getProductByProductCode(String itemCode);
 }
